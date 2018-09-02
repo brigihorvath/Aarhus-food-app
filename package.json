@@ -5,7 +5,9 @@
   "dependencies": {
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
+    "react-foursquare": "^1.0.3",
     "react-google-maps": "^9.4.5",
+    "react-icons": "^3.0.5",
     "react-scripts": "1.1.5"
   },
   "scripts": {

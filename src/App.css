@@ -1,28 +1,74 @@
-.App {
+h1 {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1.2em;
+  margin: auto;
+  padding-left: 10px;
+}
+
+
+p {
+  font-family: 'Roboto', sans-serif;
+  font-size: 1em;
+}
+
+header,
+footer {
+  background: #263238;
+  width: 100%;
+  color: #ECEFF1;
+  padding: 1% 0;
   text-align: center;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+header {
+  font-size: 1.4em;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+
+main {
+  display: flex;
+  flex-direction: row;
+  height: 100vh;
+    text-align: center;
+    width: 100%;
 }
 
-.App-title {
-  font-size: 1.5em;
+.map {
+  width: 80%;
 }
 
-.App-intro {
-  font-size: large;
+.search-venues{
+  width: 100%;
+  padding: 10px;
+  font-size: 1em;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.sidebar {
+  background: #26344c;
+  border-right: solid 1px #607D8B;
+  color: #ECEFF1;
+  font-family: 'Comfortaa', cursive;
+  font-size: 1em;
+  height: 100%;
+  overflow-y: auto;
+  position: relative;
+  line-height: 1;
+  text-align: left;
+  width: 20%;
+  z-index: 1;
+}
+
+ul {
+  list-style-type: none;
+  padding-left: 10px;
+}
+
+li {
+  padding: 4px;
+}
+
+.search-venues{
+  width: 100%;
+  padding: 10px;
+  font-size: 1em;
 }
