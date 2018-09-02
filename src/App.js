@@ -34,7 +34,8 @@ class App extends Component {
     venueName: '',
     Lat: 0,
     Lng: 0,
-    selectedVenue: ''
+    selectedVenue: '',
+    isOpen: false
   }
 
   componentDidMount(){
@@ -73,23 +74,26 @@ class App extends Component {
     }
 
 
-    markerClick = ((props, marker, x) => {
-      this.setState({
-        selectedPlace: marker.position,
-        activeMarker: marker,
-        showingInfoWindow: true,
-        venueName: marker.name,
-        Lat: marker.lat,
-        Lng: marker.lng,
-        selectedVenue: x
-      })
-    });
-
+   
 updateSelectedVenue = (id) => {
-      this.setState({selectedVenue : id})
-
+      this.setState(
+        {selectedVenue : id,
+        isOpen : true}
+        )
     }
 
+infoWindowOpen = () => {
+
+  this.setState({
+    isOpen: true
+  })
+}
+
+infoWindowClose = () => {
+  this.setState({
+    isOpen: false
+  });
+}
 
 
 
@@ -108,16 +112,9 @@ updateSelectedVenue = (id) => {
                      />
         <div className="map">
         <Map venuesOnTheList = {this.state.venuesOnTheList}
-              selectedPlace = {this.state.selectedPlace}
-              activeMarker = {this.state.activeMarker}
-              showingInfoWindow = {this.state.showingInfoWindow}
-              venueName = {this.state.venueName}
-              Lat = {this.state.Lat}
-              Lng = {this.state.Lng}
-              onMarkerClick = {this.markerClick}
-              updateSelectedVenue = {this.updateSelectedVenue}
-              selectedVenue = {this.state.selectedVenue}
-
+              isOpen = {this.state.isOpen}
+              infoWindowOpen = {this.infoWindowOpen}
+              infoWindowClose = {this.infoWindowClose}
               />
         </div>
         </main>
