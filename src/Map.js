@@ -33,20 +33,13 @@ const Map = compose(
             <div className={'infos'}>
           <h2>{venue.name}</h2>
           <p>{venue.location.address}</p>
-
           </div>
         </InfoWindow>
        }
        </Marker> 
-        )
-       
-      
-      )}
-      
-      </GoogleMap>)
-      
+      ) 
+      )} 
+    </GoogleMap>)  
    )
 
-
- 
 export default Map;
