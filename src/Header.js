@@ -27,7 +27,8 @@ class Header extends Component {
             <MdMenu 
               role='navigation' 
               aria-label='Choose which place you wanna go!'
-              style={{ color: "white", float: "left", margin: "0 0 0 25px" }}
+              className = {'hamb-button'}
+              // style={{ color: "white", float: "left", margin: "0 0 0 25px" }}
               size= "35"
               tabIndex="0"
               onClick={this.toggleVenueList}

@@ -9,8 +9,7 @@ const Map = compose(
     //setting the props of the map
     googleMapURL: "https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyD9Sr_9XxqbUR9_ss2_ZYSd2pMTsZs7m80",
     loadingElement: <div style={{ height: '100%' }} />,
-    //setting only the height of the container element, because zoom disappears on width: 100%
-    containerElement: <div style={{ height: '100%' }} />,
+    containerElement: <div style={{ height: '100%', width: '100%' }} />,
     mapElement: <div style={{ height: '100%'}} />,
   }),
   withScriptjs,

@@ -1,4 +1,4 @@
-console.log('egyaltalan itt jarunk???');
+// console.log('egyaltalan itt jarunk???');
 
 self.addEventListener('install', (event) =>
   {
@@ -16,12 +16,12 @@ self.addEventListener('install', (event) =>
   	'favicon.ico'
 
     ];
-    console.log('AAA1');
+    // console.log('AAA1');
     let somePromise = caches.open('neighborhood2')
       .then((cache) => { return cache.addAll(urlsToCache);});
-    console.log('AAA2: ' + somePromise);
+    // console.log('AAA2: ' + somePromise);
     event.waitUntil(somePromise);
-    console.log('AAA3');
+    // console.log('AAA3');
   }
 );
 
