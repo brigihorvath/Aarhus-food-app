@@ -10,13 +10,13 @@ const Map = compose(
     googleMapURL: "https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyD9Sr_9XxqbUR9_ss2_ZYSd2pMTsZs7m80",
     loadingElement: <div style={{ height: '100%' }} />,
     //setting only the height of the container element, because zoom disappears on width: 100%
-    containerElement: <div style={{ height: '100vh' }} />,
-    mapElement: <div style={{ height: '100%' , width: '100%'}} />,
+    containerElement: <div style={{ height: '100%' }} />,
+    mapElement: <div style={{ height: '100%'}} />,
   }),
   withScriptjs,
   withGoogleMap,
 )((props) => (<GoogleMap
-        defaultCenter = {{ lat: 56.153919, lng: 10.1975273 }}
+        defaultCenter = {{ lat: 56.1528, lng: 10.1971463 }}
         defaultZoom = { 15 }
         onClick ={props.infoWindowClose}
       >
@@ -30,7 +30,11 @@ const Map = compose(
         <InfoWindow
             onCloseClick={props.infoWindowClose}
             >
-          <h2>Something</h2>
+            <div className={'infos'}>
+          <h2>{venue.name}</h2>
+          <p>{venue.location.address}</p>
+
+          </div>
         </InfoWindow>
        }
        </Marker> 
