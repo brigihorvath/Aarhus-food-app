@@ -33,7 +33,7 @@ class Header extends Component {
               onClick={this.toggleVenueList}
               onKeyPress={this.toggleVenueList}
                />
-          <h1 tabIndex="0">Go to the Lake Balaton, because it is cool!</h1>
+          <h1 tabIndex="0">Cool restaurants - Aarhus C</h1>
         </header>
       )
   }

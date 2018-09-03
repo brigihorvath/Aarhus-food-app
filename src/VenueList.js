@@ -19,7 +19,7 @@ class VenueList extends Component{
 
 	render(){
 		const { onUpdateQuery, venuesOnTheList, query, updateSelectedVenue } = this.props
-
+		console.log(venuesOnTheList)
 		return(
 			<div className="sidebar">
 				<div className='list-venues-top'>
@@ -29,7 +29,7 @@ class VenueList extends Component{
 				<ul className='venue-list'>
 				{venuesOnTheList.map((venue) =>
 					( <li key={venue.id} className='venue-list-item'>
-					<p onClick={(venue) =>updateSelectedVenue(venue.id)}>{venue.name}</p>
+					<p onClick={() =>updateSelectedVenue(venue.id)}>{venue.name}</p>
 					</li>
 					))}
 			</ul>

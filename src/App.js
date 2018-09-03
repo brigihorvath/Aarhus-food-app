@@ -15,8 +15,8 @@ const foursquare = require('react-foursquare')({
 
 
 const parameters = {
-  'll': '46.9614047,17.8536013',
-  'section': 'topPicks',
+  'll': '56.150325,10.2024871',
+  'section': 'food',
   'limit': 20
 }
 
@@ -29,11 +29,6 @@ class App extends Component {
     mapError: false,
     query: '',
     selectedPlace : {lat: 0, lng: 0},
-    activeMarker: {},
-    showingInfoWindow: true,
-    venueName: '',
-    Lat: 0,
-    Lng: 0,
     selectedVenue: '',
     isOpen: false
   }
@@ -80,22 +75,14 @@ updateSelectedVenue = (id) => {
         {selectedVenue : id,
         isOpen : true}
         )
-    }
-
-infoWindowOpen = () => {
-
-  this.setState({
-    isOpen: true
-  })
 }
+
 
 infoWindowClose = () => {
   this.setState({
     isOpen: false
   });
 }
-
-
 
   render() {
     return (
@@ -113,8 +100,10 @@ infoWindowClose = () => {
         <div className="map">
         <Map venuesOnTheList = {this.state.venuesOnTheList}
               isOpen = {this.state.isOpen}
-              infoWindowOpen = {this.infoWindowOpen}
+              // infoWindowOpen = {this.infoWindowOpen}
               infoWindowClose = {this.infoWindowClose}
+              updateSelectedVenue = {this.updateSelectedVenue}
+              selectedVenue = {this.state.selectedVenue}
               />
         </div>
         </main>

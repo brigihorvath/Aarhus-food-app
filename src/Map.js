@@ -6,28 +6,31 @@ import { compose, withProps } from 'recompose';
 
 const Map = compose(
   withProps({
+    //setting the props of the map
     googleMapURL: "https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places&key=AIzaSyD9Sr_9XxqbUR9_ss2_ZYSd2pMTsZs7m80",
     loadingElement: <div style={{ height: '100%' }} />,
-    containerElement: <div style={{ height: '100%' }} />,
-    mapElement: <div style={{ height: '100%' }} />,
+    //setting only the height of the container element, because zoom disappears on width: 100%
+    containerElement: <div style={{ height: '100vh' }} />,
+    mapElement: <div style={{ height: '100%' , width: '100%'}} />,
   }),
   withScriptjs,
   withGoogleMap,
 )((props) => (<GoogleMap
-        defaultCenter = {{ lat: 46.9614047, lng: 17.8536013 }}
-        defaultZoom = { 11 }
+        defaultCenter = {{ lat: 56.153919, lng: 10.1975273 }}
+        defaultZoom = { 15 }
+        onClick ={props.infoWindowClose}
       >
       {props.venuesOnTheList.map((venue, index)=> (
         <Marker
         key = {index}
         position={{ lat: venue.location.lat, lng: venue.location.lng }}
-        onClick={props.infoWindowOpen}
+        onClick={() => props.updateSelectedVenue(venue.id)}
         >
-      {props.isOpen &&
+      {props.isOpen && props.selectedVenue === venue.id &&
         <InfoWindow
             onCloseClick={props.infoWindowClose}
             >
-          <span>Something</span>
+          <h2>Something</h2>
         </InfoWindow>
        }
        </Marker> 
