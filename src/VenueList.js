@@ -19,7 +19,6 @@ class VenueList extends Component{
 
 	render(){
 		const { onUpdateQuery, venuesOnTheList, query, updateSelectedVenue } = this.props
-		console.log(venuesOnTheList)
 		return(
 			<div className="sidebar">
 				<div className='list-venues-top'>

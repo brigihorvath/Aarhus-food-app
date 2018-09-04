@@ -30,7 +30,8 @@ class App extends Component {
     query: '',
     selectedPlace : {lat: 0, lng: 0},
     selectedVenue: '',
-    isOpen: false
+    isOpen: false,
+    menuHidden: false
   }
 
   componentDidMount(){
@@ -84,12 +85,28 @@ infoWindowClose = () => {
   });
 }
 
+toggleVenueList = () => {
+    if(this.state.menuHidden === false){
+      // document.getElementsByClassName('sidebar')[0].style.width = '0'
+      document.getElementsByClassName('map')[0].style.width = '100%'
+      this.setState({menuHidden: true})
+    }else{
+      // document.getElementsByClassName('sidebar')[0].style.width = '20%'
+      document.getElementsByClassName('map')[0].style.width = '80%'
+      this.setState({menuHidden: false})   
+  }
+}
+
+
   render() {
     return (
         <div className="container">
-        <Header/>
+        <Header
+          toggleVenueList = {this.toggleVenueList}
+        />
         <main>
-        <VenueList venues = {this.state.venues}
+        {this.state.menuHidden === false &&
+          <VenueList venues = {this.state.venues}
         venuesOnTheList= {this.state.venuesOnTheList}
                      onUpdateQuery = {this.updateQuery}
                      query = {this.state.query}
@@ -97,6 +114,8 @@ infoWindowClose = () => {
                      updateSelectedVenue = {this.updateSelectedVenue}
                      onMarkerClick = {this.markerClick}
                      />
+        }
+        
         <div className="map">
         <Map venuesOnTheList = {this.state.venuesOnTheList}
               isOpen = {this.state.isOpen}

@@ -1,6 +1,8 @@
 import React from 'react';
-import { withGoogleMap, GoogleMap, Marker, InfoWindow, withScriptjs } from 'react-google-maps';
+import { withGoogleMap, GoogleMap, Marker, InfoWindow, withScriptjs  } from 'react-google-maps';
 import { compose, withProps } from 'recompose';
+
+
 
 
 
@@ -13,18 +15,21 @@ const Map = compose(
     mapElement: <div style={{ height: '100%'}} />,
   }),
   withScriptjs,
-  withGoogleMap,
-)((props) => (<GoogleMap
-        defaultCenter = {{ lat: 56.1528, lng: 10.1971463 }}
+  withGoogleMap
+)((props) => <GoogleMap
+        defaultCenter = {{ lat: 56.1529, lng: 10.1971463 }}
         defaultZoom = { 15 }
         onClick ={props.infoWindowClose}
+        points = {props.venuesOnTheList}
       >
+
       {props.venuesOnTheList.map((venue, index)=> (
         <Marker
         key = {index}
         position={{ lat: venue.location.lat, lng: venue.location.lng }}
         onClick={() => props.updateSelectedVenue(venue.id)}
         >
+        
       {props.isOpen && props.selectedVenue === venue.id &&
         <InfoWindow
             onCloseClick={props.infoWindowClose}
@@ -38,7 +43,7 @@ const Map = compose(
        </Marker> 
       ) 
       )} 
-    </GoogleMap>)  
-   )
+    </GoogleMap>
 
+   )
 export default Map;
