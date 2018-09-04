@@ -18,16 +18,16 @@ class VenueList extends Component{
 
 
 	render(){
-		const { onUpdateQuery, venuesOnTheList, query, updateSelectedVenue } = this.props
+		const { onUpdateQuery, venuesOnTheList, query, updateSelectedVenue, menuHidden } = this.props
 		return(
 			<div className="sidebar">
 				<div className='list-venues-top'>
 				<input className='search-venues' type='text' placeholder='Search venues' value={query}
 				onChange={(event) => onUpdateQuery(event.target.value)} />
 				</div>
-				<ul className='venue-list'>
+				<ul className='venue-list' aria-hidden={menuHidden ? 'true' : 'false'}>
 				{venuesOnTheList.map((venue) =>
-					( <li key={venue.id} className='venue-list-item'>
+					( <li key={venue.id} className='venue-list-item' tabIndex="0">
 					<p onClick={() =>updateSelectedVenue(venue.id)}>{venue.name}</p>
 					</li>
 					))}

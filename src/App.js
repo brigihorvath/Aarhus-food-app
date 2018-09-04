@@ -90,10 +90,13 @@ toggleVenueList = () => {
       // document.getElementsByClassName('sidebar')[0].style.width = '0'
       document.getElementsByClassName('map')[0].style.width = '100%'
       this.setState({menuHidden: true})
+      document.getElementsByClassName('sidebar')[0].setAttribute('aria-hidden', 'true')
+
     }else{
       // document.getElementsByClassName('sidebar')[0].style.width = '20%'
       document.getElementsByClassName('map')[0].style.width = '80%'
-      this.setState({menuHidden: false})   
+      this.setState({menuHidden: false})
+      
   }
 }
 
@@ -113,6 +116,7 @@ toggleVenueList = () => {
                      selectedPlace = {this.state.selectedPlace}
                      updateSelectedVenue = {this.updateSelectedVenue}
                      onMarkerClick = {this.markerClick}
+                     menuHidden = {this.state.menuHidden}
                      />
         }
         
