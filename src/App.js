@@ -4,6 +4,7 @@ import Map from './Map';
 import Header from './Header'
 import VenueList from './VenueList'
 import escapeRegExp from 'escape-string-regexp'
+import Errorhandling from './Errorhandling'
 
 
 
@@ -17,7 +18,7 @@ const foursquare = require('react-foursquare')({
 const parameters = {
   'll': '56.150325,10.2024871',
   'section': 'food',
-  'limit': 20
+  'limit': 30
 }
 
 
@@ -25,8 +26,8 @@ class App extends Component {
   state = {
     venues : [],
     venuesOnTheList : [],
-    foursquareError: false,
-    mapError: false,
+    foursquareFailure: false,
+    authenticationFailure: false,
     query: '',
     selectedPlace : {lat: 0, lng: 0},
     selectedVenue: '',
@@ -37,17 +38,23 @@ class App extends Component {
   componentDidMount(){
     foursquare.venues.explore(parameters)
       .then(result => {
-        result.response.groups[0].items.map(item => {
+        result.response.groups[0].items.map(item => 
 
-          return this.setState({ 
+            (this.setState({ 
             key: item,
             venues: this.state.venues.concat([item.venue]),
             venuesOnTheList: this.state.venuesOnTheList.concat([item.venue]),
-                                 foursquareError: false })
-        })
-      }).catch(err => {
-        return this.setState({ forsquareError: true })
-      })
+                                 foursquareError: false }))
+        )
+      }).catch(err => 
+         (this.setState({ forsquareError: true }))
+              )
+
+    /*according to the Google Maps API docs:
+     "If the following global function is defined it will be called when the authentication fails":
+     */
+      window.gm_authFailure = () => 
+           (this.setState({authenticationFailure: true}))
     }
 
     
@@ -87,28 +94,29 @@ infoWindowClose = () => {
 
 toggleVenueList = () => {
     if(this.state.menuHidden === false){
-      // document.getElementsByClassName('sidebar')[0].style.width = '0'
       document.getElementsByClassName('map')[0].style.width = '100%'
       this.setState({menuHidden: true})
       document.getElementsByClassName('sidebar')[0].setAttribute('aria-hidden', 'true')
 
     }else{
-      // document.getElementsByClassName('sidebar')[0].style.width = '20%'
       document.getElementsByClassName('map')[0].style.width = '80%'
       this.setState({menuHidden: false})
       
   }
 }
-
-
   render() {
+    console.log(this.state.authenticationFailure + ' ' + this.state.foursquareError)
+
     return (
         <div className="container">
         <Header
           toggleVenueList = {this.toggleVenueList}
         />
+
         <main>
-        {this.state.menuHidden === false &&
+
+        
+            {this.state.menuHidden === false &&
           <VenueList venues = {this.state.venues}
         venuesOnTheList= {this.state.venuesOnTheList}
                      onUpdateQuery = {this.updateQuery}
@@ -120,15 +128,22 @@ toggleVenueList = () => {
                      />
         }
         
+        {(this.state.authenticationFailure === false && this.state.foursquareFailure === false) &&
         <div className="map">
         <Map venuesOnTheList = {this.state.venuesOnTheList}
               isOpen = {this.state.isOpen}
-              // infoWindowOpen = {this.infoWindowOpen}
               infoWindowClose = {this.infoWindowClose}
               updateSelectedVenue = {this.updateSelectedVenue}
               selectedVenue = {this.state.selectedVenue}
               />
         </div>
+      }
+      {(this.state.authenticationFailure === true || this.state.foursquareFailure === true) &&
+        <Errorhandling 
+          gmFailure = {this.state.authenticationFailure}
+          foursquareError = {this.state.foursquareFailure}
+        />
+      }
         </main>
       </div>
     );

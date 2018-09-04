@@ -22,7 +22,7 @@ class VenueList extends Component{
 		return(
 			<div className="sidebar">
 				<div className='list-venues-top'>
-				<label for="search">Search venues</label>
+				<label htmlFor="search">Search venues</label>
 				<input className='search-venues' id='search' type='text' placeholder='Search venues' value={query}
 				onChange={(event) => onUpdateQuery(event.target.value)} />
 				</div>
