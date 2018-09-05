@@ -3,8 +3,11 @@ import { withGoogleMap, GoogleMap, Marker, InfoWindow, withScriptjs  } from 'rea
 import { compose, withProps } from 'recompose';
 
 
-
-
+/*this component is for rendering the map, the markers and the infowindows
+  for this component react-google-maps was used
+  first I tried with google-maps-react, 
+  but to trigger the Infowindow also from the list, this package seemed to be a better choice
+*/
 
 const Map = compose(
   withProps({

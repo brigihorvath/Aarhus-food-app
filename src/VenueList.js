@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import './App.css'
 import PropTypes from 'prop-types';
 
-
+ //this Component shows the sidebar VenueList and the searchbox
 
 
 class VenueList extends Component{

@@ -7,14 +7,13 @@ import escapeRegExp from 'escape-string-regexp'
 import Errorhandling from './Errorhandling'
 
 
-
-
+//npm foursquare-react 
 const foursquare = require('react-foursquare')({
   clientID: 'W14BTCBGIYSN01ZDOZMBAZR3EM4ZFRCCL1QO4EFOVTREGN1L',
   clientSecret: 'NJNM3ZUH4XDVMLZPN0FYZUNJ1OEKOG1B5NSQ1JNADMOEJOQO'
 })
 
-
+//Foursquare parameters
 const parameters = {
   'll': '56.150325,10.2024871',
   'section': 'food',
@@ -23,32 +22,41 @@ const parameters = {
 
 
 class App extends Component {
+
+
   state = {
+    //the list of all the venues the application gets from the Foursquare
     venues : [],
+    //the list of 
     venuesOnTheList : [],
+    //states to pass to the Errorhandling page
     foursquareFailure: false,
     authenticationFailure: false,
+    //text in the serch field
     query: '',
-    selectedPlace : {lat: 0, lng: 0},
+    //used for the VenueList to update the Map, when a venue is clicked
     selectedVenue: '',
+    //used for toggling the InfoWindow
     isOpen: false,
+    //used for toggling the List of Venues
     menuHidden: false
   }
 
   componentDidMount(){
+
+    //npm - foursquare-react - fetch the venues
     foursquare.venues.explore(parameters)
       .then(result => {
-        result.response.groups[0].items.map(item => 
-
-            (this.setState({ 
-            key: item,
-            venues: this.state.venues.concat([item.venue]),
-            venuesOnTheList: this.state.venuesOnTheList.concat([item.venue]),
-                                 foursquareError: false }))
-        )
-      }).catch(err => 
-         (this.setState({ forsquareError: true }))
-              )
+        result.response.groups[0].items.map(item => {
+            return this.setState({ 
+                    key: item,
+                    venues: this.state.venues.concat([item.venue]),
+                    venuesOnTheList: this.state.venuesOnTheList.concat([item.venue]),
+                    foursquareFailure: false })
+        })
+      }).catch(err => this.setState({foursquareFailure: true}))
+         
+              
 
     /*according to the Google Maps API docs:
      "If the following global function is defined it will be called when the authentication fails":
@@ -57,7 +65,7 @@ class App extends Component {
            (this.setState({authenticationFailure: true}))
     }
 
-    
+    //updates the app according to the search
     updateQuery = (query) => {
       if (query) {
       this.setState({ query: query.trim() })
@@ -77,51 +85,53 @@ class App extends Component {
     }
 
 
-   
-updateSelectedVenue = (id) => {
-      this.setState(
-        {selectedVenue : id,
-        isOpen : true}
-        )
-}
+    //if somebody clicks on a List item, it sets the Venue ID and the InfoWindoW open
+    updateSelectedVenue = (id) => {
+          this.setState(
+            {selectedVenue : id,
+            isOpen : true}
+            )
+    }
+
+    //closes the InfoWindow
+    infoWindowClose = () => {
+      this.setState({
+        isOpen: false
+      });
+    }
 
 
-infoWindowClose = () => {
-  this.setState({
-    isOpen: false
-  });
-}
+    //toggles the VenueList and sets it to aria-hidden if it is not shown
+    toggleVenueList = () => {
+        if(this.state.menuHidden === false){
+          document.getElementsByClassName('map')[0].style.width = '100%'
+          this.setState({menuHidden: true})
+          document.getElementsByClassName('sidebar')[0].setAttribute('aria-hidden', 'true')
 
-toggleVenueList = () => {
-    if(this.state.menuHidden === false){
-      document.getElementsByClassName('map')[0].style.width = '100%'
-      this.setState({menuHidden: true})
-      document.getElementsByClassName('sidebar')[0].setAttribute('aria-hidden', 'true')
+        }else{
+          document.getElementsByClassName('map')[0].style.width = '80%'
+          this.setState({menuHidden: false})
+          
+      }
+    }
 
-    }else{
-      document.getElementsByClassName('map')[0].style.width = '80%'
-      this.setState({menuHidden: false})
-      
-  }
-}
+
   render() {
-    console.log(this.state.authenticationFailure + ' ' + this.state.foursquareError)
 
     return (
         <div className="container">
+
         <Header
           toggleVenueList = {this.toggleVenueList}
         />
 
         <main>
-
         
             {this.state.menuHidden === false &&
           <VenueList venues = {this.state.venues}
         venuesOnTheList= {this.state.venuesOnTheList}
                      onUpdateQuery = {this.updateQuery}
                      query = {this.state.query}
-                     selectedPlace = {this.state.selectedPlace}
                      updateSelectedVenue = {this.updateSelectedVenue}
                      onMarkerClick = {this.markerClick}
                      menuHidden = {this.state.menuHidden}
@@ -141,7 +151,7 @@ toggleVenueList = () => {
       {(this.state.authenticationFailure === true || this.state.foursquareFailure === true) &&
         <Errorhandling 
           gmFailure = {this.state.authenticationFailure}
-          foursquareError = {this.state.foursquareFailure}
+          foursquareFailure = {this.state.foursquareFailure}
         />
       }
         </main>
