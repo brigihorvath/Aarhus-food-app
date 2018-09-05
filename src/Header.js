@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './App.css';
-import {MdMenu} from 'react-icons/md'
+import {FaBars} from 'react-icons/fa'
 
 
 class Header extends Component {
@@ -12,7 +12,7 @@ class Header extends Component {
 
     return(
          <header className="mapHeader">
-            <MdMenu 
+            <FaBars 
               role='navigation' 
               aria-label='Choose which place you wanna go!'
               className = {'hamb-button'}
