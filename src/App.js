@@ -9,8 +9,8 @@ import Errorhandling from './Errorhandling'
 
 //npm foursquare-react 
 const foursquare = require('react-foursquare')({
-  clientID: 'W14BTCBGIYSN01ZDOZMBAZR3EM4ZFRCCL1QO4EFOVTREGN1L',
-  clientSecret: 'NJNM3ZUH4XDVMLZPN0FYZUNJ1OEKOG1B5NSQ1JNADMOEJOQO'
+  clientID: '',
+  clientSecret: ''
 })
 
 //Foursquare parameters
